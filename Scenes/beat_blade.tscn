@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://caorftd8bikhk"]
+
+[ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_kd75f"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kd75f"]
+distance = -78.0
+
+[sub_resource type="Gradient" id="Gradient_kd75f"]
+colors = PackedColorArray(0.2520276, 0.25202766, 0.25202763, 1, 0.38170326, 0.38170323, 0.38170323, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1hfh5"]
+gradient = SubResource("Gradient_kd75f")
+
+[node name="Beat Down" type="Node2D" unique_id=764503420]
+
+[node name="Player" parent="." unique_id=1269888237 instance=ExtResource("1_kd75f")]
+position = Vector2(60, 69)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1061494994]
+position = Vector2(-1, -38)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2008054233]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1825436098]
+shape = SubResource("WorldBoundaryShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1485839906]
+position = Vector2(-1, 109.00001)
+rotation = -1.5698918
+scale = Vector2(1, 9.384058)
+texture = SubResource("GradientTexture2D_1hfh5")
