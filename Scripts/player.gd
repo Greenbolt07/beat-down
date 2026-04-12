@@ -137,7 +137,7 @@ func _update_animation(direction: float) -> void:
 		animated_sprite.play("Fall Loop")
 
 func _handle_dash_input(direction: float) -> float:
-	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped():
+	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped() and !is_attacking and !is_dashing:
 		dash_speed = SPEED + DASH_SPEED_BONUS
 		is_dashing = true
 		animated_sprite.play("Dash")
@@ -229,17 +229,28 @@ func set_player_facing(facing_x: float) -> void:
 	transform = Transform2D(Vector2(facing_x, 0.0), Vector2(0.0, 1.0), transform.origin)
 
 func start_light_attack() -> void:
+	_stop_dash()
 	can_lunge = false
 	is_attacking = true
 	var attack_anim = LIGHT_ATTACK_ANIMATIONS.pick_random()
 	animated_sprite.play(attack_anim)
 	hitbox.monitoring = true
 
+func stop_attack() -> void:
+	can_lunge = false
+	is_attacking = false
+	hitbox.monitoring = false
+
+func _stop_dash() -> void:
+	dash_speed = 0.0
+	is_dashing = false
+	if !dash_length.is_stopped():
+		dash_length.stop()
+
 func reset_to_position(spawn_position: Vector2) -> void:
 	global_position = spawn_position
 	velocity = Vector2.ZERO
-	dash_speed = 0.0
-	is_dashing = false
+	_stop_dash()
 	is_running = false
 	wall_past = false
 	jump_time = 0.0
@@ -261,7 +272,7 @@ func _on_dash_cooldown_timeout() -> void:
 	dash_speed = SPEED
 
 func _on_dash_length_timeout() -> void:
-	is_dashing = false
+	_stop_dash()
 
 func _on_past_timeout() -> void:
 	wall_past = false
