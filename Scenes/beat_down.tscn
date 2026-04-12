@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_3118a"]
 [ext_resource type="Script" uid="uid://dma4t15x6r8ne" path="res://Scripts/beat_down.gd" id="1_fwn7j"]
+[ext_resource type="Texture2D" uid="uid://c8gkatxhdf3oj" path="res://icon.svg" id="3_6yyab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hfh5"]
 size = Vector2(41, 667)
@@ -42,6 +43,12 @@ gradient = SubResource("Gradient_plrwc")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_void"]
 size = Vector2(2400, 120)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qwd3p"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
 [node name="Beat Down" type="Node2D" unique_id=764503420]
 script = ExtResource("1_fwn7j")
 
@@ -55,7 +62,7 @@ position = Vector2(60, 69)
 position = Vector2(-1, -38)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+position_smoothing_speed = 8.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2008054233]
 
@@ -96,3 +103,12 @@ position = Vector2(0, 420)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidResetZone" unique_id=663344229]
 shape = SubResource("RectangleShape2D_void")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=235902702]
+z_index = -94
+material = SubResource("CanvasItemMaterial_qwd3p")
+scroll_scale = Vector2(0.245, 0.245)
+scroll_offset = Vector2(678, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1521294726]
+texture = ExtResource("3_6yyab")
