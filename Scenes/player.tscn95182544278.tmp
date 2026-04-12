@@ -407,11 +407,11 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
-size = Vector2(55, 18)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1ek2"]
 height = 58.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
+size = Vector2(55, 18)
 
 [node name="Player" type="CharacterBody2D" unique_id=1269888237]
 script = ExtResource("1_cvnsp")
@@ -421,14 +421,6 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Fall Start"
 autoplay = "Idle"
-
-[node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
-position = Vector2(0, 42)
-
-[node name="Hitbox" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D" unique_id=270273664]
-position = Vector2(-40.5, -34)
-shape = SubResource("RectangleShape2D_x3wgy")
-debug_color = Color(0.5851421, 0.39655155, 0, 0.41960785)
 
 [node name="Player Physics" type="CollisionShape2D" parent="." unique_id=1585859419]
 position = Vector2(-1, -29)
@@ -441,8 +433,14 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="Area2D" type="Area2D" parent="." unique_id=1854258361]
+
+[node name="Hitbox" type="CollisionShape2D" parent="Area2D" unique_id=270273664]
+position = Vector2(-40.5, -34)
+shape = SubResource("RectangleShape2D_x3wgy")
+debug_color = Color(0.5851421, 0.39655155, 0, 0.41960785)
+
 [node name="Past" type="Timer" parent="." unique_id=1942366538]
-wait_time = 0.3
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -3,13 +3,16 @@ extends CharacterBody2D
 # Movement Variables
 const SPEED = 200
 var SPEEDF :int= 0
-var LAST_DIRECTION :int= -1
+var LAST_DIRECTION :float= -1
 var IS_DASHING := false
 var IS_RUNNING := false
 var current_speed = SPEED
 const JUMP_VELOCITY = -300.0
 var was_on_floor := true
 var was_on_wall := true
+var wall_past := false
+var time = 0
+var Hang_time = 1
 
 # Other variables
 var CAN_LUNGE := false
@@ -19,13 +22,14 @@ var light_attack_animations = [
 	"Melee Attack Light 2",
     "Melee Attack Light 3"
 ]
-const wally = -300
-const wallx = 200
+const wally = -400
+const wallx = 250
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var dash_length: Timer = $DashLength
-@onready var hitbox: Area2D = $Area2D
+@onready var hitbox: Area2D = $AnimatedSprite2D/Area2D
+@onready var past: Timer = $Past
 
 func _ready():
 	hitbox.monitoring = false
@@ -50,7 +54,6 @@ func _physics_process(delta: float) -> void:
 	# Detects attack
 	if Input.is_action_just_pressed("Light Attack") and !IS_ATTACKING:
 		start_light_attack()
-		print(CAN_LUNGE)
 	
 	# Determines if player is sprinting
 	IS_RUNNING = Input.is_action_pressed("Sprint")
@@ -89,21 +92,39 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("Dash")
 		dash_cooldown.start()
 		dash_length.start()
+
+	# Was on wall????
+	if is_on_wall_only():
+		wall_past = true
+		past.start()
 	
+	# Time since Jump
+	time += delta
+	if Input.is_action_just_pressed("Jump"):
+		time = 0
+
 	# Slide on wall
 	if is_on_wall_only():
-		if get_wall_normal().x == -1 and Input.is_action_pressed("Right"):
+		if get_wall_normal().x == -1 and Input.is_action_pressed("Right") or !Input.is_action_pressed("Left"):
 			if not is_on_floor():
-				velocity.y = 0
-				velocity += get_gravity() * delta
+				if time < Hang_time:
+					velocity.y = 0
+				else:
+					velocity.y = 50 * time - 50
+					velocity += get_gravity() * delta
 				if Input.is_action_pressed("Jump"):
 					velocity.y = wally
-		if get_wall_normal().x == 1 and Input.is_action_pressed("Left"):
+					velocity.x = get_wall_normal().x * wallx
+		if get_wall_normal().x == 1 and Input.is_action_pressed("Left") or !Input.is_action_pressed("Right"):
 			if not is_on_floor():
-				velocity.y = 0
-				velocity += get_gravity() * delta
+				if time < Hang_time:
+					velocity.y = 0
+				else:
+					velocity.y = 200 * time - 200
+					velocity += get_gravity() * delta
 				if Input.is_action_pressed("Jump"):
 					velocity.y = wally
+					velocity.x = get_wall_normal().x * wallx
 
 	# Movement
 	if IS_RUNNING:
@@ -116,16 +137,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			pass
 	else:
-		if IS_DASHING:
-			velocity.x = LAST_DIRECTION * SPEEDF
-		elif direction:
-			velocity.x = direction * current_speed
+		if wall_past:
+			pass
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			if IS_DASHING:
+				velocity.x = LAST_DIRECTION * SPEEDF
+			elif direction:
+				velocity.x = direction * current_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	move_and_slide()
 	
-func _process(delta):
+func _process(_delta):
 	if IS_ATTACKING and !CAN_LUNGE:
 		if animated_sprite.frame >= 3:
 			CAN_LUNGE = true
@@ -151,3 +175,7 @@ func _on_dash_cooldown_timeout() -> void:
 
 func _on_dash_length_timeout() -> void:
 	IS_DASHING = false
+
+
+func _on_past_timeout() -> void:
+	wall_past = false
