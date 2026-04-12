@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_3118a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hfh5"]
-size = Vector2(41, 192)
+size = Vector2(41, 667)
 
 [sub_resource type="Gradient" id="Gradient_1hfh5"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -51,11 +51,11 @@ position_smoothing_enabled = true
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2008054233]
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=589694311]
-position = Vector2(747, -67)
+position = Vector2(747, 170.5)
 shape = SubResource("RectangleShape2D_1hfh5")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D3" unique_id=80421143]
-scale = Vector2(0.65625, 3)
+scale = Vector2(0.65625, 10.453125)
 texture = SubResource("GradientTexture2D_asixx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=216896699]

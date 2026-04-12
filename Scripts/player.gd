@@ -13,6 +13,7 @@ var was_on_wall := true
 var wall_past := false
 var time = 0
 var Hang_time = 1
+var Walltime = 1
 
 # Other variables
 var CAN_LUNGE := false
@@ -46,9 +47,9 @@ func _physics_process(delta: float) -> void:
 	# Determines player didrection.
 	var direction := Input.get_axis("Left", "Right")
 	if direction > 0:
-		animated_sprite.flip_h = true
+		set_player_facing(-1.0)
 	elif direction < 0:
-		animated_sprite.flip_h = false
+		set_player_facing(1.0)
 	if direction != 0:
 		LAST_DIRECTION = direction
 	
@@ -58,6 +59,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Determines if player is sprinting
 	IS_RUNNING = Input.is_action_pressed("Sprint")
+
+	Walltime += delta
+	if !is_on_wall():
+		Walltime = 1
 	
 	# Determines 
 	if IS_ATTACKING:
@@ -66,6 +71,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("Dash")
 	else:
 		if is_on_floor():
+			animated_sprite.speed_scale = Walltime
 			if direction == 0:
 				animated_sprite.play("Idle")
 			else:
@@ -75,7 +81,11 @@ func _physics_process(delta: float) -> void:
 					animated_sprite.play("Walk")
 		else:
 			if is_on_wall():
-				animated_sprite.play("Dash")
+				if velocity.y < 20:
+					animated_sprite.play("Hang")
+				else:
+					animated_sprite.play("Wall Slide")
+					animated_sprite.speed_scale = Walltime/3
 			else:
 				if was_on_floor or was_on_wall:
 					animated_sprite.play("Fall Start")
@@ -154,6 +164,9 @@ func _process(_delta):
 	if IS_ATTACKING and !CAN_LUNGE:
 		if animated_sprite.frame >= 3:
 			CAN_LUNGE = true
+
+func set_player_facing(facing_x: float) -> void:
+	transform = Transform2D(Vector2(facing_x, 0.0), Vector2(0.0, 1.0), transform.origin)
 
 func start_light_attack():
 	CAN_LUNGE = false
