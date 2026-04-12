@@ -15,6 +15,7 @@ var time = 0
 var Hang_time = 1
 var Walltime = 1
 
+
 # Other variables
 var CAN_LUNGE := false
 var IS_ATTACKING := false
