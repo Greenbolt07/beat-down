@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://caorftd8bikhk"]
 
-[ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_kd75f"]
+[ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_3118a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hfh5"]
 size = Vector2(41, 192)
@@ -40,7 +40,7 @@ gradient = SubResource("Gradient_plrwc")
 
 [node name="Beat Down" type="Node2D" unique_id=764503420]
 
-[node name="Player" parent="." unique_id=1269888237 instance=ExtResource("1_kd75f")]
+[node name="Player" parent="." unique_id=1269888237 instance=ExtResource("1_3118a")]
 position = Vector2(60, 69)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1061494994]
