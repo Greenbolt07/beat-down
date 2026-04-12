@@ -35,6 +35,7 @@ func _ready():
 	hitbox.monitoring = false
 
 func _physics_process(delta: float) -> void:
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -153,7 +154,6 @@ func _process(_delta):
 	if IS_ATTACKING and !CAN_LUNGE:
 		if animated_sprite.frame >= 3:
 			CAN_LUNGE = true
-			print(CAN_LUNGE)
 
 func start_light_attack():
 	CAN_LUNGE = false
@@ -175,7 +175,6 @@ func _on_dash_cooldown_timeout() -> void:
 
 func _on_dash_length_timeout() -> void:
 	IS_DASHING = false
-
 
 func _on_past_timeout() -> void:
 	wall_past = false
