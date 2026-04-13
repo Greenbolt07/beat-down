@@ -401,7 +401,7 @@ func _on_past_timeout() -> void:
 func _update_playerphysics_hitbox() -> void:
 	if Input.is_action_pressed("Crouch"):
 		if velocity.x > 150 or velocity.x < -150:
-			player_physics.scale = Vector2(1,0.5)
+			player_physics.scale = Vector2(1,0.6)
 			player_physics.position= Vector2(0,-25)
 		else:
 			player_physics.scale = Vector2(1,0.8)
