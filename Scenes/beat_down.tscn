@@ -40,8 +40,8 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_op7qw"]
 gradient = SubResource("Gradient_plrwc")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_void"]
-size = Vector2(2400, 120)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6yyab"]
+distance = 23.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qwd3p"]
 particles_animation = true
@@ -191,7 +191,7 @@ position = Vector2(0, 420)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidResetZone" unique_id=663344229]
 position = Vector2(0, 147)
-shape = SubResource("RectangleShape2D_void")
+shape = SubResource("WorldBoundaryShape2D_6yyab")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=235902702]
 z_index = -94
