@@ -32,7 +32,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_kd75f")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddhyv"]
-size = Vector2(38, 174)
+size = Vector2(38, 209)
 
 [sub_resource type="Gradient" id="Gradient_plrwc"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -75,7 +75,7 @@ scale = Vector2(0.65625, 10.453125)
 texture = SubResource("GradientTexture2D_asixx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=216896699]
-position = Vector2(520, 96)
+position = Vector2(522, 96)
 shape = SubResource("RectangleShape2D_asixx")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D2" unique_id=583358003]
@@ -91,17 +91,106 @@ scale = Vector2(8.46875, 0.65625)
 texture = SubResource("GradientTexture2D_1hfh5")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=559554289]
-position = Vector2(567, -128)
+position = Vector2(584, -141.5)
 shape = SubResource("RectangleShape2D_ddhyv")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D4" unique_id=285623406]
-scale = Vector2(0.59375, 2.75)
+scale = Vector2(0.59375, 3.265625)
 texture = SubResource("GradientTexture2D_op7qw")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=811293073]
+position = Vector2(-525, 97)
+shape = SubResource("RectangleShape2D_asixx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D5" unique_id=634237664]
+scale = Vector2(3.78125, 0.65625)
+texture = SubResource("GradientTexture2D_p7s1j")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D" unique_id=1500483917]
+position = Vector2(-593, -140)
+shape = SubResource("RectangleShape2D_ddhyv")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D6" unique_id=683300030]
+scale = Vector2(0.59375, 3.265625)
+texture = SubResource("GradientTexture2D_op7qw")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D" unique_id=385792344]
+position = Vector2(-763, 172)
+shape = SubResource("RectangleShape2D_1hfh5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D7" unique_id=113237134]
+scale = Vector2(0.65625, 10.453125)
+texture = SubResource("GradientTexture2D_asixx")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D" unique_id=234282106]
+position = Vector2(-375, 420)
+shape = SubResource("RectangleShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D8" unique_id=1907485166]
+scale = Vector2(8.46875, 0.65625)
+texture = SubResource("GradientTexture2D_1hfh5")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D" unique_id=1513816811]
+position = Vector2(374, 418)
+shape = SubResource("RectangleShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D9" unique_id=2022382264]
+scale = Vector2(8.46875, 0.65625)
+texture = SubResource("GradientTexture2D_1hfh5")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D" unique_id=1394393039]
+position = Vector2(-863, -142)
+shape = SubResource("RectangleShape2D_asixx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D10" unique_id=1057090014]
+scale = Vector2(3.78125, 0.65625)
+texture = SubResource("GradientTexture2D_p7s1j")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D" unique_id=349049688]
+position = Vector2(847, -144)
+shape = SubResource("RectangleShape2D_asixx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D11" unique_id=937654471]
+scale = Vector2(3.78125, 0.65625)
+texture = SubResource("GradientTexture2D_p7s1j")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="StaticBody2D" unique_id=874087100]
+position = Vector2(-628, 181)
+shape = SubResource("RectangleShape2D_ddhyv")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D12" unique_id=295140291]
+scale = Vector2(0.59375, 3.265625)
+texture = SubResource("GradientTexture2D_op7qw")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D" unique_id=1393189218]
+position = Vector2(624, 179)
+shape = SubResource("RectangleShape2D_ddhyv")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D13" unique_id=758460427]
+scale = Vector2(0.59375, 3.265625)
+texture = SubResource("GradientTexture2D_op7qw")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="StaticBody2D" unique_id=2053479392]
+position = Vector2(-341, -227)
+shape = SubResource("RectangleShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D14" unique_id=345443836]
+scale = Vector2(8.46875, 0.65625)
+texture = SubResource("GradientTexture2D_1hfh5")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="StaticBody2D" unique_id=768267283]
+position = Vector2(333, -229)
+shape = SubResource("RectangleShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D15" unique_id=635398911]
+scale = Vector2(8.46875, 0.65625)
+texture = SubResource("GradientTexture2D_1hfh5")
 
 [node name="VoidResetZone" type="Area2D" parent="." unique_id=1314556677]
 position = Vector2(0, 420)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VoidResetZone" unique_id=663344229]
+position = Vector2(0, 147)
 shape = SubResource("RectangleShape2D_void")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=235902702]

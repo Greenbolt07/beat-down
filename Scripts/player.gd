@@ -66,8 +66,6 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_jump_input()
 
-	print(is_sliding, velocity.x)
-
 	var direction := _get_input_direction()
 	_handle_attack_input()
 	_update_running_state()
