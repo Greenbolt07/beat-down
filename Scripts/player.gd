@@ -25,8 +25,8 @@ const HANG_TIME := 1.0
 const ATTACK_CHARGE_FRAME := 2
 const LIGHT_ATTACK_ANIMATIONS := [
 	"Melee Attack Light 1",
-	# "Melee Attack Light 2",
-	# "Melee Attack Light 3"
+	"Melee Attack Light 2",
+	"Melee Attack Light 3"
 ]
 
 var target_wspeed :float= 0
