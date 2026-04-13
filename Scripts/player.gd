@@ -72,6 +72,9 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_jump_input()
 
+	if Input.is_action_just_pressed("Parry"):
+		print("parry")
+
 	var direction := _get_input_direction()
 	_handle_attack_input()
 	_handle_down_smash()
@@ -233,13 +236,11 @@ func _update_animation(direction: float) -> void:
 			animated_sprite.speed_scale = wall_time / 3.0
 		return
 
-	if was_on_floor or was_on_wall:
-		# Play the transition once when leaving a stable surface before looping the fall animation.
-		animated_sprite.speed_scale = 1.0
-		animated_sprite.play("Fall Start")
-	elif animated_sprite.animation == "Fall Start" and !animated_sprite.is_playing():
-		animated_sprite.speed_scale = 1.0
-		animated_sprite.play("Fall Loop")
+	if !is_on_floor():
+		if velocity.y < 0:
+			animated_sprite.play("Fall Up")
+		elif velocity.y > 0:
+			animated_sprite.play("Fall Down")
 
 func _handle_dash_input(direction: float) -> float:
 	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped() and !is_attacking and !is_dashing:
