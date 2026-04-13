@@ -9,6 +9,7 @@ const ATTACK_LUNGE_SPEED := 200.0
 const GROUND_ACCELERATION := 1400.0
 const GROUND_DECELERATION := 1800.0
 const SNEAK_DEBUFF := 1.5
+const SLIPPERINESS := 8
 const AIR_ACCELERATION := 900.0
 const AIR_DECELERATION := 700.0
 const DASH_ACCELERATION := 2600.0
@@ -328,7 +329,7 @@ func _update_horizontal_velocity(direction: float, delta: float) -> void:
 		if velocity.x != 0.0 and signf(velocity.x) != signf(direction):
 			rate = deceleration
 		if is_sliding:
-			rate = deceleration/8
+			rate = deceleration / SLIPPERINESS
 		if is_crouching:
 			target_wspeed = target_speed / SNEAK_DEBUFF
 		else:
