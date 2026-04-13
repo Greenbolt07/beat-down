@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 const SPEED := 200.0
 const JUMP_VELOCITY := -300.0
-const JUMP_COUNT := 2
+const JUMP_COUNT := 1
 const DASH_SPEED_BONUS := 400.0
 const RUN_SPEED_MULTIPLIER := 1.5
 const ATTACK_LUNGE_SPEED := 200.0
 const GROUND_ACCELERATION := 1400.0
 const GROUND_DECELERATION := 1800.0
 const SNEAK_DEBUFF := 1.5
-const SLIPPERINESS := 8
+const SLIPPERINESS := 8.0
+const SMASH_VELOCITY := 600.0
 const AIR_ACCELERATION := 900.0
 const AIR_DECELERATION := 700.0
 const DASH_ACCELERATION := 2600.0
@@ -47,7 +48,8 @@ var is_attacking := false
 var is_crouching := false
 var is_sliding = false
 var jumps := 0
-var can_jump = true
+var can_jump := true
+var is_down_smashing := false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
@@ -72,6 +74,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction := _get_input_direction()
 	_handle_attack_input()
+	_handle_down_smash()
 	_update_running_state()
 	_handle_crouch_input()
 	_update_wall_time(delta)
@@ -94,6 +97,10 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	_update_attack_input_lock()
 	_update_attack_charge()
+
+func _handle_down_smash() -> void:
+	if Input.is_action_just_pressed("Jump") and Input.is_action_pressed("Crouch") and !is_on_floor():
+		velocity.y = SMASH_VELOCITY
 
 func _update_double_jump():
 	if Input.is_action_just_pressed("Jump"):

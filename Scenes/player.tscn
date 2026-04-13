@@ -535,7 +535,7 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Floor Slide"
 autoplay = "Idle"
-frame_progress = 0.9618567
+frame_progress = 0.85782194
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)
