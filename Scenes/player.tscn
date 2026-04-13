@@ -461,7 +461,7 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Dash"
 autoplay = "Idle"
-frame_progress = 0.6342915
+frame_progress = 0.31463435
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)
