@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://caorftd8bikhk"]
+
+[ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_3118a"]
+[ext_resource type="Script" uid="uid://dma4t15x6r8ne" path="res://Scripts/beat_down.gd" id="1_fwn7j"]
+[ext_resource type="Texture2D" uid="uid://c8gkatxhdf3oj" path="res://icon.svg" id="3_6yyab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hfh5"]
+size = Vector2(41, 667)
+
+[sub_resource type="Gradient" id="Gradient_1hfh5"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_asixx"]
+gradient = SubResource("Gradient_1hfh5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asixx"]
+size = Vector2(241, 40)
+
+[sub_resource type="Gradient" id="Gradient_ddhyv"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p7s1j"]
+gradient = SubResource("Gradient_ddhyv")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kd75f"]
+size = Vector2(542, 42)
+
+[sub_resource type="Gradient" id="Gradient_kd75f"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1hfh5"]
+gradient = SubResource("Gradient_kd75f")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddhyv"]
+size = Vector2(38, 174)
+
+[sub_resource type="Gradient" id="Gradient_plrwc"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_op7qw"]
+gradient = SubResource("Gradient_plrwc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_void"]
+size = Vector2(2400, 120)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qwd3p"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[node name="Beat Down" type="Node2D" unique_id=764503420]
+script = ExtResource("1_fwn7j")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1011223344]
+position = Vector2(60, 69)
+
+[node name="Player" parent="." unique_id=1269888237 instance=ExtResource("1_3118a")]
+position = Vector2(60, 69)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1061494994]
+position = Vector2(-1, -38)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2008054233]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=589694311]
+position = Vector2(747, 170.5)
+shape = SubResource("RectangleShape2D_1hfh5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D3" unique_id=80421143]
+scale = Vector2(0.65625, 10.453125)
+texture = SubResource("GradientTexture2D_asixx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=216896699]
+position = Vector2(520, 96)
+shape = SubResource("RectangleShape2D_asixx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D2" unique_id=583358003]
+scale = Vector2(3.78125, 0.65625)
+texture = SubResource("GradientTexture2D_p7s1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=397251459]
+position = Vector2(1, 95)
+shape = SubResource("RectangleShape2D_kd75f")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D" unique_id=297250104]
+scale = Vector2(8.46875, 0.65625)
+texture = SubResource("GradientTexture2D_1hfh5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=559554289]
+position = Vector2(567, -128)
+shape = SubResource("RectangleShape2D_ddhyv")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D4" unique_id=285623406]
+scale = Vector2(0.59375, 2.75)
+texture = SubResource("GradientTexture2D_op7qw")
+
+[node name="VoidResetZone" type="Area2D" parent="." unique_id=1314556677]
+position = Vector2(0, 420)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidResetZone" unique_id=663344229]
+shape = SubResource("RectangleShape2D_void")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=235902702]
+z_index = -94
+material = SubResource("CanvasItemMaterial_qwd3p")
+scroll_scale = Vector2(0.245, 0.245)
+scroll_offset = Vector2(678, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1521294726]
+texture = ExtResource("3_6yyab")

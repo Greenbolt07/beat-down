@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2cmn3gwmuina" path="res://Assets/Sprites/john(run).png" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dlue77fh8qkyp" path="res://Assets/Sprites/John_Hang.png" id="4_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://djprnqdg4t3aj" path="res://Assets/Sprites/John_Punch.png" id="5_3smsa"]
+[ext_resource type="Texture2D" uid="uid://csll48dk6cdxw" path="res://Assets/Sprites/john_Floor_Slide.png" id="5_ukyrk"]
 [ext_resource type="Texture2D" uid="uid://i4me0886vf02" path="res://Assets/Sprites/John_Run_Fast.png" id="5_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://bamgp41xfm7wr" path="res://Assets/Sprites/John_Jab.png" id="6_8erm5"]
 [ext_resource type="Texture2D" uid="uid://cll0gqcx0b08v" path="res://Assets/Sprites/John_Sneak.png" id="10_pu2lt"]
@@ -84,6 +85,14 @@ region = Rect2(0, 96, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
 atlas = ExtResource("2_vgqql")
 region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj1g2"]
+atlas = ExtResource("5_ukyrk")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usbl8"]
+atlas = ExtResource("5_ukyrk")
+region = Rect2(0, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_57lvd"]
 atlas = ExtResource("4_f1ek2")
@@ -331,6 +340,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nj1g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usbl8")
+}],
+"loop": true,
+"name": &"Floor Slide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_57lvd")
 }, {
 "duration": 1.0,
@@ -513,9 +533,9 @@ script = ExtResource("1_cvnsp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=580524000]
 position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
-animation = &"Crouching"
+animation = &"Floor Slide"
 autoplay = "Idle"
-frame_progress = 0.31140828
+frame_progress = 0.067956
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)

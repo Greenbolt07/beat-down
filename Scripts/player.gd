@@ -43,6 +43,7 @@ var can_enter_attack_charge := false
 var is_attack_input_locked := false
 var is_attacking := false
 var is_crouching := false
+var is_sliding = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
@@ -65,6 +66,8 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_jump_input()
 
+	print(is_sliding, velocity.x)
+
 	var direction := _get_input_direction()
 	_handle_attack_input()
 	_update_running_state()
@@ -80,6 +83,7 @@ func _physics_process(delta: float) -> void:
 	_update_wall_past_state(direction)
 	_update_jump_timer(delta)
 	_apply_wall_slide(delta, direction)
+	_update_is_sliding()
 	_update_horizontal_velocity(direction, delta)
 		
 	move_and_slide()
@@ -176,7 +180,11 @@ func _update_animation(direction: float) -> void:
 		animated_sprite.play("Dash")
 		return
 
-	if is_crouching:
+	if is_sliding:
+		animated_sprite.play("Floor Slide")
+		return
+
+	if is_crouching and !is_sliding:
 		if velocity.x > -5 and velocity.x < 5:
 			animated_sprite.play("Crouching")
 			return
@@ -303,6 +311,8 @@ func _update_horizontal_velocity(direction: float, delta: float) -> void:
 		var rate := acceleration
 		if velocity.x != 0.0 and signf(velocity.x) != signf(direction):
 			rate = deceleration
+		if is_sliding:
+			rate = deceleration/5
 		if is_crouching:
 			target_wspeed = target_speed / SNEAK_DEBUFF
 		else:
@@ -397,3 +407,9 @@ func _update_playerphysics_hitbox() -> void:
 	else:
 		player_physics.scale = Vector2(1,1)
 		player_physics.position= Vector2(0,-30)
+
+func _update_is_sliding():
+	if is_crouching and is_on_floor_only() and (velocity.x > 150 or velocity.x < -150):
+		is_sliding = true
+	else:
+		is_sliding = false
