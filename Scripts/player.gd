@@ -243,7 +243,7 @@ func _update_animation(direction: float) -> void:
 			animated_sprite.play("Fall Down")
 
 func _handle_dash_input(direction: float) -> float:
-	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped() and !is_attacking and !is_dashing:
+	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped() and !is_attacking and !is_dashing and !is_on_wall():
 		dash_speed = SPEED + DASH_SPEED_BONUS
 		is_dashing = true
 		animated_sprite.speed_scale = 1.0
