@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://djprnqdg4t3aj" path="res://Assets/Sprites/John_Punch.png" id="5_3smsa"]
 [ext_resource type="Texture2D" uid="uid://i4me0886vf02" path="res://Assets/Sprites/John_Run_Fast.png" id="5_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://bamgp41xfm7wr" path="res://Assets/Sprites/John_Jab.png" id="6_8erm5"]
-[ext_resource type="Texture2D" uid="uid://cll0gqcx0b08v" path="res://Assets/Sprites/John_Sneak.png" id="10_pu2lt"]
 [ext_resource type="Texture2D" uid="uid://dpbu1kpoy3rkx" path="res://Assets/Sprites/John_wall_slide.png" id="10_tx1dd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1htnp"]
@@ -208,22 +207,6 @@ region = Rect2(96, 96, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0gysh"]
 atlas = ExtResource("5_x3wgy")
 region = Rect2(0, 192, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6b312"]
-atlas = ExtResource("10_pu2lt")
-region = Rect2(0, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lisdf"]
-atlas = ExtResource("10_pu2lt")
-region = Rect2(96, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n1x1j"]
-atlas = ExtResource("10_pu2lt")
-region = Rect2(0, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c8b32"]
-atlas = ExtResource("10_pu2lt")
-region = Rect2(96, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
 atlas = ExtResource("3_6t5aa")
@@ -454,23 +437,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6b312")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lisdf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n1x1j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c8b32")
-}],
-"loop": true,
-"name": &"Sneaking",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_8erm5")
 }, {
 "duration": 1.0,
@@ -515,7 +481,7 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Crouching"
 autoplay = "Idle"
-frame_progress = 0.31140828
+frame_progress = 0.16297524
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)

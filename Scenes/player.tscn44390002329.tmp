@@ -513,9 +513,9 @@ script = ExtResource("1_cvnsp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=580524000]
 position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
-animation = &"Crouching"
+animation = &"Sneaking"
 autoplay = "Idle"
-frame_progress = 0.31140828
+frame_progress = 0.48352033
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)

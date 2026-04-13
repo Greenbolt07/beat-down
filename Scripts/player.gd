@@ -7,6 +7,7 @@ const RUN_SPEED_MULTIPLIER := 1.5
 const ATTACK_LUNGE_SPEED := 200.0
 const GROUND_ACCELERATION := 1400.0
 const GROUND_DECELERATION := 1800.0
+const SNEAK_DEBUFF := 1.5
 const AIR_ACCELERATION := 900.0
 const AIR_DECELERATION := 700.0
 const DASH_ACCELERATION := 2600.0
@@ -25,6 +26,7 @@ const LIGHT_ATTACK_ANIMATIONS := [
 	# "Melee Attack Light 3"
 ]
 
+var target_wspeed :float= 0
 var dash_speed := 0.0
 var last_direction := -1.0
 var is_dashing := false
@@ -40,15 +42,18 @@ var is_attack_charging := false
 var can_enter_attack_charge := false
 var is_attack_input_locked := false
 var is_attacking := false
+var is_crouching := false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var dash_length: Timer = $DashLength
 @onready var hitbox: Area2D = $AnimatedSprite2D/Area2D
 @onready var past_timer: Timer = $Past
+@onready var player_physics: CollisionShape2D = $"Player Physics"
 
 func _ready() -> void:
 	hitbox.monitoring = false
+	player_physics.scale = Vector2(1,1)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("Light Attack"):
@@ -63,8 +68,10 @@ func _physics_process(delta: float) -> void:
 	var direction := _get_input_direction()
 	_handle_attack_input()
 	_update_running_state()
+	_handle_crouch_input()
 	_update_wall_time(delta)
 	_update_animation(direction)
+	_update_playerphysics_hitbox()
 
 	was_on_floor = is_on_floor()
 	was_on_wall = is_on_wall()
@@ -145,7 +152,14 @@ func _handle_attack_input() -> void:
 
 func _update_running_state() -> void:
 	is_running = Input.is_action_pressed("Sprint")
-	current_speed = SPEED * RUN_SPEED_MULTIPLIER if is_running else SPEED
+	current_speed = SPEED * RUN_SPEED_MULTIPLIER if is_running and !is_crouching else SPEED
+
+func _handle_crouch_input() -> void:
+	if Input.is_action_pressed("Crouch") and is_on_floor():
+		is_crouching = true
+		return
+	else:
+		is_crouching = false
 
 func _update_wall_time(delta: float) -> void:
 	wall_time += delta
@@ -161,6 +175,14 @@ func _update_animation(direction: float) -> void:
 		animated_sprite.speed_scale = 1.0
 		animated_sprite.play("Dash")
 		return
+
+	if is_crouching:
+		if velocity.x > -5 and velocity.x < 5:
+			animated_sprite.play("Crouching")
+			return
+		else:
+			animated_sprite.play("Sneaking")
+			return
 
 	if is_on_floor():
 		animated_sprite.speed_scale = wall_time
@@ -262,7 +284,7 @@ func _update_horizontal_velocity(direction: float, delta: float) -> void:
 			var attack_deceleration := ATTACK_GROUND_BRAKE if is_on_floor() else ATTACK_AIR_BRAKE
 			velocity.x = move_toward(velocity.x, 0.0, attack_deceleration * delta)
 		return
-
+	
 	if wall_past and !is_on_wall_only():
 		wall_past = false
 
@@ -281,7 +303,11 @@ func _update_horizontal_velocity(direction: float, delta: float) -> void:
 		var rate := acceleration
 		if velocity.x != 0.0 and signf(velocity.x) != signf(direction):
 			rate = deceleration
-		velocity.x = move_toward(velocity.x, target_speed, rate * delta)
+		if is_crouching:
+			target_wspeed = target_speed / SNEAK_DEBUFF
+		else:
+			target_wspeed = target_speed
+		velocity.x = move_toward(velocity.x, target_wspeed, rate * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, deceleration * delta)
 
@@ -363,3 +389,11 @@ func _on_dash_length_timeout() -> void:
 
 func _on_past_timeout() -> void:
 	wall_past = false
+
+func _update_playerphysics_hitbox() -> void:
+	if Input.is_action_pressed("Crouch"):
+		player_physics.scale = Vector2(1,0.8)
+		player_physics.position= Vector2(0,-25)
+	else:
+		player_physics.scale = Vector2(1,1)
+		player_physics.position= Vector2(0,-30)

@@ -515,7 +515,7 @@ position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_8erm5")
 animation = &"Crouching"
 autoplay = "Idle"
-frame_progress = 0.31140828
+frame_progress = 0.21826294
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)
