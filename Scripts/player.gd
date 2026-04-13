@@ -328,7 +328,7 @@ func _update_horizontal_velocity(direction: float, delta: float) -> void:
 		if velocity.x != 0.0 and signf(velocity.x) != signf(direction):
 			rate = deceleration
 		if is_sliding:
-			rate = deceleration/5
+			rate = deceleration/8
 		if is_crouching:
 			target_wspeed = target_speed / SNEAK_DEBUFF
 		else:
