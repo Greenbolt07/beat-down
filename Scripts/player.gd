@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED := 200.0
 const JUMP_VELOCITY := -300.0
+const JUMP_COUNT := 2
 const DASH_SPEED_BONUS := 400.0
 const RUN_SPEED_MULTIPLIER := 1.5
 const ATTACK_LUNGE_SPEED := 200.0
@@ -44,6 +45,8 @@ var is_attack_input_locked := false
 var is_attacking := false
 var is_crouching := false
 var is_sliding = false
+var jumps := 0
+var can_jump = true
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
@@ -85,6 +88,17 @@ func _physics_process(delta: float) -> void:
 	_update_horizontal_velocity(direction, delta)
 		
 	move_and_slide()
+	
+	print(can_jump,jumps)
+	
+	if Input.is_action_just_pressed("Jump"):
+		jumps += 1
+	if is_on_floor() or is_on_wall():
+		jumps = 0
+	if jumps < JUMP_COUNT:
+		can_jump = true
+	else:
+		can_jump = false
 
 func _process(_delta: float) -> void:
 	_update_attack_input_lock()
@@ -125,6 +139,9 @@ func _apply_gravity(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 func _handle_jump_input() -> void:
+	if Input.is_action_just_pressed("Jump") and can_jump:
+		velocity.y = JUMP_VELOCITY
+
 	if !Input.is_action_pressed("Jump") or !is_on_floor():
 		return
 
@@ -271,7 +288,8 @@ func _apply_wall_slide_motion(delta: float, fall_scale: float, fall_offset: floa
 		velocity += get_gravity() * delta
 
 	if Input.is_action_pressed("Jump"):
-		velocity.y = WALL_JUMP_VELOCITY
+		if can_jump:
+			velocity.y = WALL_JUMP_VELOCITY
 		velocity.x = wall_normal_x * WALL_JUMP_PUSH
 
 func _update_horizontal_velocity(direction: float, delta: float) -> void:
@@ -374,6 +392,8 @@ func reset_to_position(spawn_position: Vector2) -> void:
 	hitbox.monitoring = false
 	animated_sprite.speed_scale = 1.0
 	animated_sprite.play("Idle")
+	is_sliding = false
+	can_jump = true
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "Dash":
@@ -401,7 +421,7 @@ func _on_past_timeout() -> void:
 func _update_playerphysics_hitbox() -> void:
 	if Input.is_action_pressed("Crouch"):
 		if velocity.x > 150 or velocity.x < -150:
-			player_physics.scale = Vector2(1,0.6)
+			player_physics.scale = Vector2(1,0.7)
 			player_physics.position= Vector2(0,-25)
 		else:
 			player_physics.scale = Vector2(1,0.8)
