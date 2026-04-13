@@ -85,12 +85,16 @@ func _physics_process(delta: float) -> void:
 	_update_jump_timer(delta)
 	_apply_wall_slide(delta, direction)
 	_update_is_sliding()
+	_update_double_jump()
 	_update_horizontal_velocity(direction, delta)
 		
 	move_and_slide()
 	
-	print(can_jump,jumps)
-	
+func _process(_delta: float) -> void:
+	_update_attack_input_lock()
+	_update_attack_charge()
+
+func _update_double_jump():
 	if Input.is_action_just_pressed("Jump"):
 		jumps += 1
 	if is_on_floor() or is_on_wall():
@@ -99,10 +103,6 @@ func _physics_process(delta: float) -> void:
 		can_jump = true
 	else:
 		can_jump = false
-
-func _process(_delta: float) -> void:
-	_update_attack_input_lock()
-	_update_attack_charge()
 
 func _update_attack_input_lock() -> void:
 	if is_attack_input_locked and !Input.is_action_pressed("Light Attack"):
