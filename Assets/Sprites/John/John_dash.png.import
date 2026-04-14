@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csll48dk6cdxw"
-path="res://.godot/imported/john_Floor_Slide.png-daf7786d03435386cc9de49686280ccf.ctex"
+uid="uid://bgkr5l0k3qmwr"
+path="res://.godot/imported/John_dash.png-ebc0ac07b41e84147bdcf88b19ec7788.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/john_Floor_Slide.png"
-dest_files=["res://.godot/imported/john_Floor_Slide.png-daf7786d03435386cc9de49686280ccf.ctex"]
+source_file="res://Assets/Sprites/John/John_dash.png"
+dest_files=["res://.godot/imported/John_dash.png-ebc0ac07b41e84147bdcf88b19ec7788.ctex"]
 
 [params]
 

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c00wub8sbud55" path="res://Scenes/player.tscn" id="1_3118a"]
 [ext_resource type="Script" uid="uid://dma4t15x6r8ne" path="res://Scripts/beat_down.gd" id="1_fwn7j"]
 [ext_resource type="Texture2D" uid="uid://c8gkatxhdf3oj" path="res://icon.svg" id="3_6yyab"]
+[ext_resource type="PackedScene" uid="uid://beooocvro1t5m" path="res://Scenes/basic_enemy.tscn" id="4_fwulm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hfh5"]
 size = Vector2(41, 667)
@@ -65,6 +66,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2008054233]
+collision_layer = 3
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=589694311]
 position = Vector2(747, 170.5)
@@ -201,3 +203,6 @@ scroll_offset = Vector2(678, 324)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1521294726]
 texture = ExtResource("3_6yyab")
+
+[node name="Basic enemy" parent="." unique_id=1400568907 instance=ExtResource("4_fwulm")]
+position = Vector2(-157, -40)

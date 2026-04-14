@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpbu1kpoy3rkx"
-path="res://.godot/imported/John_wall_slide.png-65416aa6c455cc962809ff6d84443e02.ctex"
+uid="uid://cll0gqcx0b08v"
+path="res://.godot/imported/John_Sneak.png-8c209d75a640fe0bd9783ebf2e1268e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John_wall_slide.png"
-dest_files=["res://.godot/imported/John_wall_slide.png-65416aa6c455cc962809ff6d84443e02.ctex"]
+source_file="res://Assets/Sprites/John/John_Sneak.png"
+dest_files=["res://.godot/imported/John_Sneak.png-8c209d75a640fe0bd9783ebf2e1268e3.ctex"]
 
 [params]
 

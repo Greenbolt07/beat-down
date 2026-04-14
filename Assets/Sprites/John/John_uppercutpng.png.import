@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bamgp41xfm7wr"
-path="res://.godot/imported/John_Jab.png-3b7aa7c1a2e4d58291110b19d3b5ad0f.ctex"
+uid="uid://dmkikxbou3deb"
+path="res://.godot/imported/John_uppercutpng.png-8f8e760bf40e1512aec442efc0bffff4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John_Jab.png"
-dest_files=["res://.godot/imported/John_Jab.png-3b7aa7c1a2e4d58291110b19d3b5ad0f.ctex"]
+source_file="res://Assets/Sprites/John/John_uppercutpng.png"
+dest_files=["res://.godot/imported/John_uppercutpng.png-8f8e760bf40e1512aec442efc0bffff4.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlue77fh8qkyp"
-path="res://.godot/imported/John_Hang.png-f92d79fd813df9825ad68fc63a0227cf.ctex"
+uid="uid://i4me0886vf02"
+path="res://.godot/imported/John_Run_Fast.png-6a12e3d8b4488e766a21d85096fabd3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John_Hang.png"
-dest_files=["res://.godot/imported/John_Hang.png-f92d79fd813df9825ad68fc63a0227cf.ctex"]
+source_file="res://Assets/Sprites/John/John_Run_Fast.png"
+dest_files=["res://.godot/imported/John_Run_Fast.png-6a12e3d8b4488e766a21d85096fabd3b.ctex"]
 
 [params]
 

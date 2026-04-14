@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djprnqdg4t3aj"
-path="res://.godot/imported/John_Punch.png-990ac7d60cbd80d94623e4a29c75b643.ctex"
+uid="uid://duofgna3430bi"
+path="res://.godot/imported/John_pound.png-1bda689f314401a6336c02cf3fcb24c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John_Punch.png"
-dest_files=["res://.godot/imported/John_Punch.png-990ac7d60cbd80d94623e4a29c75b643.ctex"]
+source_file="res://Assets/Sprites/John/John_pound.png"
+dest_files=["res://.godot/imported/John_pound.png-1bda689f314401a6336c02cf3fcb24c1.ctex"]
 
 [params]
 

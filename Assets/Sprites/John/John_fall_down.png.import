@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmkikxbou3deb"
-path="res://.godot/imported/John_uppercutpng.png-321cf2a202320279d523f6f0f07fa1f1.ctex"
+uid="uid://cxecnxqbjxe6b"
+path="res://.godot/imported/John_fall_down.png-9fed841b6a4c2422eef99d716e145c40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John_uppercutpng.png"
-dest_files=["res://.godot/imported/John_uppercutpng.png-321cf2a202320279d523f6f0f07fa1f1.ctex"]
+source_file="res://Assets/Sprites/John/John_fall_down.png"
+dest_files=["res://.godot/imported/John_fall_down.png-9fed841b6a4c2422eef99d716e145c40.ctex"]
 
 [params]
 

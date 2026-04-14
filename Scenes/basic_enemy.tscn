@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://beooocvro1t5m"]
+
+[ext_resource type="Script" uid="uid://c4suxl65qtbvd" path="res://Scripts/basic_enemy.gd" id="1_fecjr"]
+[ext_resource type="Texture2D" uid="uid://hgjnnubuhaci" path="res://Assets/Sprites/John/John(Idle).png" id="2_lal1l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4aor"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kac6"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cefa"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pvwk"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhrsy"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nk2ac"]
+atlas = ExtResource("2_lal1l")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ch6oa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4aor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kac6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cefa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pvwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhrsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nk2ac")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7iov"]
+height = 66.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fecjr"]
+size = Vector2(20, 66)
+
+[node name="Basic enemy" type="CharacterBody2D" unique_id=1400568907]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_fecjr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=425215722]
+position = Vector2(0, -42)
+sprite_frames = SubResource("SpriteFrames_ch6oa")
+autoplay = "default"
+frame_progress = 0.07863353
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="." unique_id=168684191]
+visibility_layer = 2
+position = Vector2(-1, -33)
+shape = SubResource("CapsuleShape2D_h7iov")
+debug_color = Color(0.7576878, 0.15427944, 0.09482687, 0.41960785)
+
+[node name="Area2D" type="Area2D" parent="EnemyCollision" unique_id=1790254128]
+
+[node name="Hurtbox" type="CollisionShape2D" parent="EnemyCollision/Area2D" unique_id=361476499]
+shape = SubResource("RectangleShape2D_fecjr")
+debug_color = Color(0.8103015, 0.24713847, 0, 0.41960785)
+
+[connection signal="body_entered" from="EnemyCollision/Area2D" to="." method="_on_area_2d_body_entered"]

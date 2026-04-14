@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hgjnnubuhaci"
-path="res://.godot/imported/John(Idle).png-3ae6a70b5abf497979bb2d5054288682.ctex"
+uid="uid://mf3oymw4iop"
+path="res://.godot/imported/John_parry.png-c7ab3c942dce2e9cb358d381c5297d64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John(Idle).png"
-dest_files=["res://.godot/imported/John(Idle).png-3ae6a70b5abf497979bb2d5054288682.ctex"]
+source_file="res://Assets/Sprites/John/John_parry.png"
+dest_files=["res://.godot/imported/John_parry.png-c7ab3c942dce2e9cb358d381c5297d64.ctex"]
 
 [params]
 

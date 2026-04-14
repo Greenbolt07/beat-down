@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cndy3jmi1te5v"
-path="res://.godot/imported/John Crouch.png-6c931d32cae83d64824694810ba74feb.ctex"
+uid="uid://dpbu1kpoy3rkx"
+path="res://.godot/imported/John_wall_slide.png-cc94b6aab7b5f5416a758f07d8024fac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/John Crouch.png"
-dest_files=["res://.godot/imported/John Crouch.png-6c931d32cae83d64824694810ba74feb.ctex"]
+source_file="res://Assets/Sprites/John/John_wall_slide.png"
+dest_files=["res://.godot/imported/John_wall_slide.png-cc94b6aab7b5f5416a758f07d8024fac.ctex"]
 
 [params]
 
