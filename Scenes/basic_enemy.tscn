@@ -68,7 +68,7 @@ script = ExtResource("1_fecjr")
 position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_ch6oa")
 autoplay = "default"
-frame_progress = 0.07863353
+frame_progress = 0.6880447
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="." unique_id=168684191]
 visibility_layer = 2
@@ -82,4 +82,4 @@ debug_color = Color(0.7576878, 0.15427944, 0.09482687, 0.41960785)
 shape = SubResource("RectangleShape2D_fecjr")
 debug_color = Color(0.8103015, 0.24713847, 0, 0.41960785)
 
-[connection signal="body_entered" from="EnemyCollision/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_shape_entered" from="EnemyCollision/Area2D" to="." method="_on_area_2d_area_shape_entered"]

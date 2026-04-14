@@ -60,6 +60,7 @@ var is_down_smashing := false
 
 func _ready() -> void:
 	hitbox.monitoring = false
+	hitbox.monitorable = false
 	player_physics.scale = Vector2(1,1)
 
 func _input(event: InputEvent) -> void:
@@ -71,9 +72,6 @@ func _physics_process(delta: float) -> void:
 	# Process state in a fixed order so animation and movement react to the same frame of input.
 	_apply_gravity(delta)
 	_handle_jump_input()
-
-	if Input.is_action_just_pressed("Parry"):
-		print("parry")
 
 	var direction := _get_input_direction()
 	_handle_attack_input()
@@ -360,6 +358,7 @@ func start_light_attack() -> void:
 	animated_sprite.speed_scale = 1.0
 	animated_sprite.play(attack_anim)
 	hitbox.monitoring = true
+	hitbox.monitorable = true
 
 func stop_attack() -> void:
 	can_lunge = false
@@ -367,6 +366,7 @@ func stop_attack() -> void:
 	can_enter_attack_charge = false
 	is_attacking = false
 	hitbox.monitoring = false
+	hitbox.monitorable = false
 
 func _stop_dash() -> void:
 	dash_speed = 0.0
@@ -399,6 +399,7 @@ func reset_to_position(spawn_position: Vector2) -> void:
 	is_attack_input_locked = false
 	is_attacking = false
 	hitbox.monitoring = false
+	hitbox.monitorable = false
 	animated_sprite.speed_scale = 1.0
 	animated_sprite.play("Idle")
 	is_sliding = false
@@ -417,6 +418,7 @@ func end_attack() -> void:
 	is_attack_charging = false
 	can_enter_attack_charge = false
 	hitbox.monitoring = false
+	hitbox.monitorable = false
 
 func _on_dash_cooldown_timeout() -> void:
 	dash_speed = SPEED

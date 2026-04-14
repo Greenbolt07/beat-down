@@ -660,7 +660,6 @@ frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D" unique_id=1854258361]
 position = Vector2(0, 42)
-collision_mask = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D" unique_id=270273664]
 position = Vector2(-40.5, -34)
