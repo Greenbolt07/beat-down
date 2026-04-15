@@ -23,6 +23,7 @@ const WALL_JUMP_VELOCITY := -400.0
 const WALL_JUMP_PUSH := 300.0
 const HANG_TIME := 1.0
 const ATTACK_CHARGE_FRAME := 2
+const DOUBLE_TAP_DASH_WINDOW := 0.25
 const LIGHT_ATTACK_ANIMATIONS := [
 	"Melee Attack Light 1",
 	"Melee Attack Light 2",
@@ -32,6 +33,9 @@ const LIGHT_ATTACK_ANIMATIONS := [
 var target_wspeed :float= 0
 var dash_speed := 0.0
 var last_direction := -1.0
+var last_tap_direction := 0.0
+var last_tap_time := -1.0
+var hit_targets: Dictionary = {}
 var is_dashing := false
 var is_running := false
 var current_speed := SPEED
@@ -94,10 +98,13 @@ func _physics_process(delta: float) -> void:
 	_update_horizontal_velocity(direction, delta)
 		
 	move_and_slide()
+	_update_attack_hitbox_state()
+	_update_attack_hits()
 	
 func _process(_delta: float) -> void:
 	_update_attack_input_lock()
 	_update_attack_charge()
+	_update_attack_hitbox_state()
 
 func _handle_down_smash() -> void:
 	if Input.is_action_just_pressed("Jump") and Input.is_action_pressed("Crouch") and !is_on_floor():
@@ -241,16 +248,81 @@ func _update_animation(direction: float) -> void:
 			animated_sprite.play("Fall Down")
 
 func _handle_dash_input(direction: float) -> float:
-	if Input.is_action_just_pressed("Dash") and dash_cooldown.is_stopped() and !is_attacking and !is_dashing and !is_on_wall():
-		dash_speed = SPEED + DASH_SPEED_BONUS
-		is_dashing = true
-		animated_sprite.speed_scale = 1.0
-		animated_sprite.play("Dash")
-		dash_cooldown.start()
-		dash_length.start()
-		return last_direction
+	var dash_direction := _get_double_tap_dash_direction()
+
+	if _can_start_dash(dash_direction):
+		_start_dash(dash_direction)
+		return dash_direction
 
 	return direction
+
+func _get_double_tap_dash_direction() -> float:
+	var tap_direction := 0.0
+	if Input.is_action_just_pressed("Left"):
+		tap_direction = -1.0
+	elif Input.is_action_just_pressed("Right"):
+		tap_direction = 1.0
+
+	if tap_direction == 0.0:
+		return 0.0
+
+	var current_time := float(Time.get_ticks_msec()) / 1000.0
+	var is_double_tap := tap_direction == last_tap_direction and current_time - last_tap_time <= DOUBLE_TAP_DASH_WINDOW
+	last_tap_direction = tap_direction
+	last_tap_time = current_time
+
+	if is_double_tap:
+		return tap_direction
+
+	return 0.0
+
+func _can_start_dash(dash_direction: float) -> bool:
+	return dash_direction != 0.0 and dash_cooldown.is_stopped() and !is_attacking and !is_dashing and !is_on_wall()
+
+func _start_dash(dash_direction: float) -> void:
+	last_direction = dash_direction
+	dash_speed = SPEED + DASH_SPEED_BONUS
+	is_dashing = true
+	animated_sprite.speed_scale = 1.0
+	animated_sprite.play("Dash")
+	dash_cooldown.start()
+	dash_length.start()
+
+func _update_attack_hits() -> void:
+	if !is_attacking or !hitbox.monitoring:
+		return
+
+	for overlapping_area in hitbox.get_overlapping_areas():
+		_try_hit_target(overlapping_area)
+
+func _try_hit_target(area: Area2D) -> void:
+	var target := _get_hit_target(area)
+	if target == null:
+		return
+
+	var target_id := target.get_instance_id()
+	if hit_targets.has(target_id):
+		return
+
+	hit_targets[target_id] = true
+	target.receive_hit()
+
+func _get_hit_target(node: Node) -> Node:
+	var current: Node = node
+	while current != null:
+		if current.has_method("receive_hit"):
+			return current
+		current = current.get_parent()
+
+	return null
+
+func _update_attack_hitbox_state() -> void:
+	var should_enable_hitbox := _is_attack_hitbox_active()
+	hitbox.monitoring = should_enable_hitbox
+	hitbox.monitorable = should_enable_hitbox
+
+func _is_attack_hitbox_active() -> bool:
+	return is_attacking and !is_attack_charging and animated_sprite.animation in LIGHT_ATTACK_ANIMATIONS and animated_sprite.frame > ATTACK_CHARGE_FRAME
 
 func _update_wall_past_state(direction: float) -> void:
 	if _can_wall_slide(direction):
@@ -349,6 +421,7 @@ func set_player_facing(facing_x: float) -> void:
 
 func start_light_attack() -> void:
 	_stop_dash()
+	hit_targets.clear()
 	can_lunge = false
 	is_attack_charging = false
 	can_enter_attack_charge = true
@@ -357,16 +430,15 @@ func start_light_attack() -> void:
 	var attack_anim = LIGHT_ATTACK_ANIMATIONS.pick_random()
 	animated_sprite.speed_scale = 1.0
 	animated_sprite.play(attack_anim)
-	hitbox.monitoring = true
-	hitbox.monitorable = true
+	_update_attack_hitbox_state()
 
 func stop_attack() -> void:
+	hit_targets.clear()
 	can_lunge = false
 	is_attack_charging = false
 	can_enter_attack_charge = false
 	is_attacking = false
-	hitbox.monitoring = false
-	hitbox.monitorable = false
+	_update_attack_hitbox_state()
 
 func _stop_dash() -> void:
 	dash_speed = 0.0
@@ -397,9 +469,11 @@ func reset_to_position(spawn_position: Vector2) -> void:
 	is_attack_charging = false
 	can_enter_attack_charge = false
 	is_attack_input_locked = false
+	last_tap_direction = 0.0
+	last_tap_time = -1.0
+	hit_targets.clear()
 	is_attacking = false
-	hitbox.monitoring = false
-	hitbox.monitorable = false
+	_update_attack_hitbox_state()
 	animated_sprite.speed_scale = 1.0
 	animated_sprite.play("Idle")
 	is_sliding = false
@@ -414,11 +488,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		end_attack()
 
 func end_attack() -> void:
+	hit_targets.clear()
 	is_attacking = false
 	is_attack_charging = false
 	can_enter_attack_charge = false
-	hitbox.monitoring = false
-	hitbox.monitorable = false
+	_update_attack_hitbox_state()
 
 func _on_dash_cooldown_timeout() -> void:
 	dash_speed = SPEED
