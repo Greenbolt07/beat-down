@@ -642,7 +642,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
-size = Vector2(55, 18)
+size = Vector2(35, 18)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1ek2"]
 height = 58.0
@@ -662,7 +662,7 @@ frame_progress = 1.0
 position = Vector2(0, 42)
 
 [node name="Hitbox" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D" unique_id=270273664]
-position = Vector2(-40.5, -34)
+position = Vector2(-30.5, -34)
 shape = SubResource("RectangleShape2D_x3wgy")
 debug_color = Color(0.5851421, 0.39655155, 0, 0.41960785)
 
@@ -682,6 +682,7 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]
 [connection signal="timeout" from="Past" to="." method="_on_past_timeout"]

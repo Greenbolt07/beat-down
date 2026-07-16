@@ -205,4 +205,4 @@ scroll_offset = Vector2(678, 324)
 texture = ExtResource("3_6yyab")
 
 [node name="Basic enemy" parent="." unique_id=1400568907 instance=ExtResource("4_fwulm")]
-position = Vector2(-157, -40)
+position = Vector2(192, 70)

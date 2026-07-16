@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
+const HEALTH := 100
 const SPEED := 200.0
 const JUMP_VELOCITY := -300.0
 const JUMP_COUNT := 1
 const DASH_SPEED_BONUS := 400.0
 const RUN_SPEED_MULTIPLIER := 1.5
-const ATTACK_LUNGE_SPEED := 200.0
+const ATTACK_LUNGE_SPEED := 350.0
 const GROUND_ACCELERATION := 1400.0
 const GROUND_DECELERATION := 1800.0
 const SNEAK_DEBUFF := 1.5
@@ -14,9 +15,9 @@ const SMASH_VELOCITY := 600.0
 const AIR_ACCELERATION := 900.0
 const AIR_DECELERATION := 700.0
 const DASH_ACCELERATION := 2600.0
-const ATTACK_LUNGE_ACCELERATION := 2200.0
+const ATTACK_LUNGE_ACCELERATION := 5200.0
 const ATTACK_GROUND_BRAKE := 600.0
-const ATTACK_AIR_BRAKE := 300.0
+const ATTACK_AIR_BRAKE := 500.0
 const ATTACK_CHARGE_SPEED_MULTIPLIER := 0.45
 const ATTACK_CHARGE_JUMP_MULTIPLIER := 0.65
 const WALL_JUMP_VELOCITY := -400.0
@@ -54,6 +55,8 @@ var is_sliding = false
 var jumps := 0
 var can_jump := true
 var is_down_smashing := false
+var target_hit := false
+var BPM := 100
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_cooldown: Timer = $DashCooldown
@@ -291,6 +294,8 @@ func _start_dash(dash_direction: float) -> void:
 func _update_attack_hits() -> void:
 	if !is_attacking or !hitbox.monitoring:
 		return
+	else:
+		return
 
 	for overlapping_area in hitbox.get_overlapping_areas():
 		_try_hit_target(overlapping_area)
@@ -520,3 +525,7 @@ func _update_is_sliding():
 		is_sliding = true
 	else:
 		is_sliding = false
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print("stop")
+	stop_attack()
