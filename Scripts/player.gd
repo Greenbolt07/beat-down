@@ -55,7 +55,6 @@ var is_sliding = false
 var jumps := 0
 var can_jump := true
 var is_down_smashing := false
-var target_hit := false
 var BPM := 100
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
